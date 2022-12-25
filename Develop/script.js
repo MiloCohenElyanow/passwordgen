@@ -9,8 +9,8 @@ var useUpperCase;
 
 
 var finalPassword = "";
-var min = 0;
-var max = 0;
+min = 0;
+max = 0;
 
 var specialChars = ["!","@","#","$","%","^","&","*","(","(","_","-","+","=","{","}","[","]","|",";",":","<",",",">",".","?","/",];
 var nums = ["1","2","3","4","5","6","7","8","9","0",];
@@ -22,24 +22,26 @@ var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 
 
 function askQuestions(){
-  numberOfCharacters = parseInt(prompt("please enter number of characters you want: "));
+  numberOfCharacters = parseInt(prompt("please enter number of characters you want: ")); // input for number of characters write while statement to continuesly ask question until input is between 8 128 characters
 
-  okToUseSpecialChars = confirm("Do you want to use special characters?");
+  okToUseSpecialChars = confirm("Do you want to use special characters?"); //asking these questions to evaluate them to true or false.
   useNums = confirm("use numbers?");
   useLowerCase = confirm("use lowercase?");
   useUpperCase = confirm("use uppercase?");
 
-  return okToUseSpecialChars, useNums, useLowerCase, useUpperCase,numberOfCharacters;
+  return okToUseSpecialChars, useNums, useLowerCase, useUpperCase,numberOfCharacters; // returning the questions(true or false(boolean)) so they can be used anywhere in the code.
 }
 
-function genPass(){
-  if (okToUseSpecialChars){
-    console.log("okaytousespecialchars is true");
-  }
-  else{
-    console.log("okaytousespecialchars is false");
-  }
-}
+
+
+askQuestions();
+
+console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase);
+
+console.log(finalPassword);
+
+
+
 
 
 /*function writePassword() {
@@ -52,10 +54,6 @@ function genPass(){
 */
 // Add event listener to generate button
 /*generateBtn.addEventListener("click", writePassword);*/
-askQuestions();
-genPass();
-
-console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase);
 
 
 
@@ -69,36 +67,8 @@ console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase);
 
 
 
-/*
- function pickRandChars(){
-  for(i in numberOfCharacters){
-    var x = math.random(0,3);
-    if(x===0){
-      max = Math.ceil(specialChars.length);
-      min = Math.floor(0);
-      console.log(Math.floor(Math.random() * (max-min + 1) + min ));
-      }
-    else if(x===1){
-      max = Math.ceil(nums.length);
-      min = Math.floor(0);
-      console.log(Math.floor(Math.random() * (max-min +1) + min));
-    }
-    else if(x===2){
-      max = Math.ceil(lowerCase.length);
-      min = Math.floor(0);
-      console.log(Math.floor(Math.random() * (max-min +1) + min));
-    }
-    else if(x===3){
-      max = Math.ceil(upperCase.length);
-      min = Math.floor(0);
-      console.log(Math.floor(Math.random() * (max-min +1) + min));
-    }
-    else{
-      console.log("the number picked was not in the exprected range");
-    }
-  }
-} 
-*/
+
+
 //use global variables to list out all possible:
   //special characters
   //lowercase letters
