@@ -20,7 +20,6 @@ var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 
 
 
-
 function generatePassword(){
   numberOfCharacters = parseInt(prompt("please enter number of characters you want: ")); // input for number of characters write while statement to continuesly ask question until input is between 8 128 characters
 
@@ -62,11 +61,18 @@ function generatePassword(){
   var rndnum = Math.floor(Math.random() * temparray.length +1);
   finalPassword += temparray[rndnum];
   }
+  return finalPassword;
 }
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password\n");
 
+  passwordText.value = password;
 
+}
+generateBtn.addEventListener("click", writePassword);
 
-generatePassword();
+writePassword();
 
 console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase); // just logging the response we got to check it if we want to
 
