@@ -2,6 +2,8 @@
 var generateBtn = document.querySelector("#generate");
 
 var numberOfCharacters;
+
+
 var okToUseSpecialChars;
 var useNums;
 var useLowerCase;
@@ -9,8 +11,6 @@ var useUpperCase;
 
 
 var finalPassword = "";
-min = 0;
-max = 0;
 
 var specialChars = ["!","@","#","$","%","^","&","*","(","(","_","-","+","=","{","}","[","]","|",";",":","<",",",">",".","?","/",];
 var nums = ["1","2","3","4","5","6","7","8","9","0",];
@@ -21,42 +21,71 @@ var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 
 
 
-function askQuestions(){
+function generatePassword(){
   numberOfCharacters = parseInt(prompt("please enter number of characters you want: ")); // input for number of characters write while statement to continuesly ask question until input is between 8 128 characters
+
+  while (numberOfCharacters <=8 || numberOfCharacters >= 128){
+    console.log("your password length must be between 8 and 128 characters"); // checking that number of characters is between 8 and 128 and if its not console logging that and asking for the number of characters again, this will loop until the number of characters is between 8 and 128.
+    numberOfCharacters = parseInt(prompt("please enter number of characters you want: "));
+  }
 
   okToUseSpecialChars = confirm("Do you want to use special characters?"); //asking these questions to evaluate them to true or false.
   useNums = confirm("use numbers?");
   useLowerCase = confirm("use lowercase?");
   useUpperCase = confirm("use uppercase?");
 
-  return okToUseSpecialChars, useNums, useLowerCase, useUpperCase,numberOfCharacters; // returning the questions(true or false(boolean)) so they can be used anywhere in the code.
+  var temparray=[]; // defining temp array in the function will make sure it gets reset everytime the function is called, to create new passwords with different variables.
+
+  if(okToUseSpecialChars === true){ // when these if statements are excecuted if you press the ok button, it evaluates to true, and when they evaluate to true we add the corresponding array to a blank array. This way we can randomly generate characters from the selected arrays without having to go through the arrays individualy for each different type of character, that would include 16 if statements, this way we only need to use 4 and only need to use them once for each password we generate.
+    temparray.push(...specialChars); //special characters checker
+  }else{
+    console.log("specialchars will not be used");}
+
+  if(useNums === true){
+    temparray.push(...nums); // use numbers checker
+  }else{
+    console.log("numbers will not be used");}
+
+  if(useLowerCase === true){
+    temparray.push(...lowerCase); // use lowercase characters checker
+  }else{
+    console.log("lower case characters will not be used");}
+
+  if(useUpperCase === true){
+    temparray.push(...upperCase);// use uppercase characters checker
+  }else{
+    console.log("Upper case characters will not be used");}
+
+  // after these if statements the password array of useable characters is built so we can move on to selecting random characters from that array to build the actual password
+
+  for(i=0; i<numberOfCharacters; i++){ // i will iterate this code block for every number 0 through number of characters.
+  var rndnum = Math.floor(Math.random() * temparray.length +1);
+  finalPassword += temparray[rndnum];
+  }
 }
 
 
 
-askQuestions();
+generatePassword();
 
-console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase);
+console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase); // just logging the response we got to check it if we want to
 
-console.log(finalPassword);
-
-
+console.log(finalPassword); // logging the final password
 
 
 
-/*function writePassword() {
+
+/*
+function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
 }
+generateBtn.addEventListener("click", writePassword);
+
 */
-// Add event listener to generate button
-/*generateBtn.addEventListener("click", writePassword);*/
-
-
-
 
 
 
