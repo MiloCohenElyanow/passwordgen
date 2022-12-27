@@ -23,6 +23,7 @@ var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 function generatePassword(){
   numberOfCharacters = parseInt(prompt("please enter number of characters you want: ")); // input for number of characters write while statement to continuesly ask question until input is between 8 128 characters
 
+
   while (numberOfCharacters <=8 || numberOfCharacters >= 128){
     console.log("your password length must be between 8 and 128 characters"); // checking that number of characters is between 8 and 128 and if its not console logging that and asking for the number of characters again, this will loop until the number of characters is between 8 and 128.
     numberOfCharacters = parseInt(prompt("please enter number of characters you want: "));
@@ -33,6 +34,13 @@ function generatePassword(){
   useLowerCase = confirm("use lowercase?");
   useUpperCase = confirm("use uppercase?");
 
+  while(okToUseSpecialChars===false && useNums===false && useLowerCase===false && useUpperCase===false){ // checking to see if no criteria were selected
+    alert("you must select at least one defining criteria");
+    okToUseSpecialChars = confirm("Do you want to use special characters?"); //asking these questions to evaluate them to true or false.
+    useNums = confirm("use numbers?");
+    useLowerCase = confirm("use lowercase?");
+    useUpperCase = confirm("use uppercase?");
+  }
   var temparray=[]; // defining temp array in the function will make sure it gets reset everytime the function is called, to create new passwords with different variables.
 
   if(okToUseSpecialChars === true){ // when these if statements are excecuted if you press the ok button, it evaluates to true, and when they evaluate to true we add the corresponding array to a blank array. This way we can randomly generate characters from the selected arrays without having to go through the arrays individualy for each different type of character, that would include 16 if statements, this way we only need to use 4 and only need to use them once for each password we generate.
@@ -55,6 +63,14 @@ function generatePassword(){
   }else{
     console.log("Upper case characters will not be used");}
 
+  while(okToUseSpecialChars===false && useNums===false && useLowerCase===false && useUpperCase===false){
+    console.log("you must select at least one defining criteria");
+    okToUseSpecialChars = confirm("Do you want to use special characters?"); //asking these questions to evaluate them to true or false.
+    useNums = confirm("use numbers?");
+    useLowerCase = confirm("use lowercase?");
+    useUpperCase = confirm("use uppercase?");
+  }
+
   // after these if statements the password array of useable characters is built so we can move on to selecting random characters from that array to build the actual password
 
   for(i=0; i<numberOfCharacters; i++){ // i will iterate this code block for every number 0 through number of characters.
@@ -67,6 +83,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password\n");
 
+  passwordText.value = ("   "); // trying to reset the password box so the passwords dont stack but i cant figure it out.............. bruh........
   passwordText.value = password;
 
 }
@@ -78,50 +95,3 @@ console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase); // just l
 
 console.log(finalPassword); // logging the final password
 
-
-
-
-/*
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-generateBtn.addEventListener("click", writePassword);
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-//use global variables to list out all possible:
-  //special characters
-  //lowercase letters
-  //uppercase letters
-  //numbers
-
-
-//use for loop to grab random characters x number of times from an array with all the available characters
-
-
-// to set finalPassword use finalPassword+=
-
-
-/*function generatePassword(){
-  askQuestions();
-}
-*/
-
-
-
-// Write password to the #password input
