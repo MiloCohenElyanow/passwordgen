@@ -18,9 +18,7 @@ var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"
 var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
 
 
-
-
-function generatePassword(){
+function askQuestions(){
   numberOfCharacters = parseInt(prompt("please enter number of characters you want: ")); // input for number of characters write while statement to continuesly ask question until input is between 8 128 characters
 
 
@@ -41,8 +39,15 @@ function generatePassword(){
     useLowerCase = confirm("use lowercase?");
     useUpperCase = confirm("use uppercase?");
   }
-  var temparray=[]; // defining temp array in the function will make sure it gets reset everytime the function is called, to create new passwords with different variables.
+}
 
+
+
+
+function generatePassword(){
+  askQuestions();
+  var temparray=[]; // defining temp array in the function will make sure it gets reset everytime the function is called, to create new passwords with different variables.
+  
   if(okToUseSpecialChars === true){ // when these if statements are excecuted if you press the ok button, it evaluates to true, and when they evaluate to true we add the corresponding array to a blank array. This way we can randomly generate characters from the selected arrays without having to go through the arrays individualy for each different type of character, that would include 16 if statements, this way we only need to use 4 and only need to use them once for each password we generate.
     temparray.push(...specialChars); //special characters checker
   }else{
@@ -74,24 +79,24 @@ function generatePassword(){
   // after these if statements the password array of useable characters is built so we can move on to selecting random characters from that array to build the actual password
 
   for(i=0; i<numberOfCharacters; i++){ // i will iterate this code block for every number 0 through number of characters.
-  var rndnum = Math.floor(Math.random() * temparray.length +1);
+  var rndnum = Math.floor(Math.random() * temparray.length );
   finalPassword += temparray[rndnum];
   }
   return finalPassword;
+
 }
+
+
+
+
+// Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password\n");
-
-  passwordText.value = ("   "); // trying to reset the password box so the passwords dont stack but i cant figure it out.............. bruh........
+  var passwordText = document.querySelector("#password");
+  
   passwordText.value = password;
 
 }
+
+// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-writePassword();
-
-console.log(okToUseSpecialChars, useNums, useLowerCase, useUpperCase); // just logging the response we got to check it if we want to
-
-console.log(finalPassword); // logging the final password
-
